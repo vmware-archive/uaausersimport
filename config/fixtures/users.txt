@@ -1,0 +1,40 @@
+sysdomain: 10.244.0.34.xip.io
+users:
+- uid: sding
+  externalid: uid=sding,ou=People,dc=homelab,dc=io
+  emails:
+  - sding@pivotal.io
+  orgs:
+    org1:
+      roles: 111
+      spaces:
+        space1:
+          roles: 110
+        space2:
+          roles: 101
+    org2:
+      roles: 011
+      spaces:
+        space1:
+          roles: 001
+        space2:
+          roles: 001
+- uid: rparrish
+  externalid: uid=rparrish,ou=People,dc=homelab,dc=io
+  emails:
+  - rparrish@pivotal.io
+  orgs:
+    org1:
+      roles: 011
+      spaces:
+        space1:
+          roles: 100
+        space2:
+          roles: 100
+    org2:
+      roles: 111
+      spaces:
+        space1:
+          roles: 111
+        space2:
+          roles: 111
