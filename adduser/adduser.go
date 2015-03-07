@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/http/httputil"
 
 	"github.com/pivotalservices/uaaldapimport/config"
+	. "github.com/pivotalservices/uaaldapimport/token"
 )
 
 type Email struct {
@@ -52,21 +52,10 @@ func Adduser(token, uaaurl string, user *config.User) (guid string, err error) {
 		return
 	}
 	body := bytes.NewBuffer(data)
-	transport := NewRoundTripper()
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s/Users", uaaurl), body)
+	response, err := RequestWithToken(token, fmt.Sprintf("%s/Users", uaaurl), "POST", "application/json", body)
 	if err != nil {
 		return
 	}
-	req.Header.Add("Authorization", fmt.Sprintf(" Bearer %s", token))
-	req.Header.Add("Content-Type", "application/json")
-	dump, _ := httputil.DumpRequest(req, true)
-	fmt.Println(string(dump))
-	response, err := transport.RoundTrip(req)
-	if err != nil {
-		return
-	}
-	dump, _ = httputil.DumpResponse(response, true)
-	fmt.Println(string(dump))
 	return parse(response)
 }
 
