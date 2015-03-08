@@ -8,18 +8,20 @@ import (
 )
 
 type Space struct {
-	Roles string
+	Guid  string
+	Roles []string
 }
 type Org struct {
-	Roles  string
-	Spaces map[string]Space
+	Guid   string
+	Roles  []string
+	Spaces []Space
 }
 
 type User struct {
 	Uid        string
 	Externalid string
 	Emails     []string
-	Orgs       map[string]Org
+	Orgs       []Org
 }
 type Config struct {
 	Sysdomain string

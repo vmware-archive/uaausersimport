@@ -27,11 +27,63 @@ func (current TokenFunc) Next(next TokenFunc) TokenFunc {
 	}
 }
 
-type OrgFunc func(*Info, config.Org) error
-type SpaceFunc func(*Info, config.Space) error
+type OrgInfo struct {
+	Info *Info
+	Org  config.Org
+}
+type SpaceInfo struct {
+	Org   OrgInfo
+	Space config.Space
+}
 
-func (current TokenFunc) MapOrgs(orgFunc OrgFunc) SpaceFunc {
-	return nil
+type OrgFunc func(OrgInfo) ([]SpaceInfo, error)
+type SpaceFunc func(SpaceInfo) error
+type Run func() ([]SpaceInfo, error)
+type MultiRun []Run
+type OrgFuncs func(*Info) (MultiRun, error)
+type SpaceFuncs func(*Info) error
+
+func (current TokenFunc) MapOrgs(orgFunc OrgFunc) OrgFuncs {
+	return func(info *Info) (MultiRun, error) {
+		info, err := current(info)
+		if err != nil {
+			return nil, err
+		}
+		orgFuncs := make([]Run, 0)
+		for _, org := range info.User.Orgs {
+			orgInfo := OrgInfo{
+				Info: info,
+				Org:  org,
+			}
+			f := func() ([]SpaceInfo, error) {
+				return orgFunc(orgInfo)
+			}
+			orgFuncs = append(orgFuncs, f)
+		}
+		return orgFuncs, nil
+	}
+}
+
+func (orgs OrgFuncs) MapSpaces(spaceFunc SpaceFunc) SpaceFuncs {
+	return func(info *Info) error {
+		runs, err := orgs(info)
+		if err != nil {
+			return err
+		}
+		for _, orgFunc := range runs {
+			spaceInfos, err := orgFunc()
+			if err != nil {
+				return err
+			}
+			for _, spaceInfo := range spaceInfos {
+				err := spaceFunc(spaceInfo)
+				if err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	}
 }
 
 type Token struct {

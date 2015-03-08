@@ -6,11 +6,11 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/uaaldapimport/config"
+	"github.com/pivotalservices/uaaldapimport/config"
 )
 
 var _ = Describe("Config", func() {
-	file, _ := os.Open("fixtures/users.txt")
+	file, _ := os.Open("fixtures/users.yml")
 	Describe("Parse config", func() {
 		Context("with correct fixture", func() {
 			It("should be return correct config", func() {
@@ -24,12 +24,12 @@ var _ = Describe("Config", func() {
 				Ω(cfg.Users[0].Emails[0]).Should(Equal("sding@pivotal.io"))
 				Ω(cfg.Users[1].Emails[0]).Should(Equal("rparrish@pivotal.io"))
 				Ω(len(cfg.Users[0].Orgs)).Should(Equal(2))
-				Ω(cfg.Users[0].Orgs["org1"].Roles).Should(Equal("111"))
-				Ω(len(cfg.Users[0].Orgs["org1"].Spaces)).Should(Equal(2))
-				Ω(cfg.Users[0].Orgs["org1"].Spaces["space1"].Roles).Should(Equal("110"))
-				Ω(cfg.Users[0].Orgs["org2"].Spaces["space2"].Roles).Should(Equal("001"))
-				Ω(len(cfg.Users[0].Orgs["org2"].Spaces)).Should(Equal(2))
-				Ω(cfg.Users[0].Orgs["org2"].Roles).Should(Equal("011"))
+				Ω(cfg.Users[0].Orgs[0].Roles[0]).Should(Equal("managers"))
+				Ω(cfg.Users[0].Orgs[0].Roles[1]).Should(Equal("auditors"))
+				Ω(len(cfg.Users[0].Orgs[0].Spaces)).Should(Equal(2))
+				Ω(cfg.Users[0].Orgs[0].Spaces[0].Roles[0]).Should(Equal("managers"))
+				Ω(cfg.Users[0].Orgs[0].Spaces[1].Roles[1]).Should(Equal("auditors"))
+				Ω(len(cfg.Users[0].Orgs[1].Spaces)).Should(Equal(2))
 			})
 		})
 	})
