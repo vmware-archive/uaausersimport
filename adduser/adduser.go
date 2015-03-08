@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/pivotalservices/uaaldapimport/config"
 	. "github.com/pivotalservices/uaaldapimport/token"
 )
 
@@ -33,17 +32,17 @@ var NewRoundTripper = func() http.RoundTripper {
 	}
 }
 
-func Adduser(token, uaaurl string, user *config.User) (guid string, err error) {
+var Adduser TokenFunc = func(info *Info) (infoRet *Info, err error) {
 	emails := make([]Email, 0)
-	for _, value := range user.Emails {
+	for _, value := range info.User.Emails {
 		email := Email{
 			Value: value,
 		}
 		emails = append(emails, email)
 	}
 	userRequest := UserRequest{
-		UserName:   user.Uid,
-		Externalid: user.Externalid,
+		UserName:   info.User.Uid,
+		Externalid: info.User.Externalid,
 		Emails:     emails,
 		Origin:     "ldap",
 	}
@@ -52,11 +51,17 @@ func Adduser(token, uaaurl string, user *config.User) (guid string, err error) {
 		return
 	}
 	body := bytes.NewBuffer(data)
-	response, err := RequestWithToken(token, fmt.Sprintf("%s/Users", uaaurl), "POST", "application/json", body)
+	response, err := RequestWithToken(info.Token, fmt.Sprintf("%s/Users", info.Uaaurl), "POST", "application/json", body)
 	if err != nil {
 		return
 	}
-	return parse(response)
+	id, err := parse(response)
+	if err != nil {
+		return
+	}
+	info.UserId = id
+	infoRet = info
+	return
 }
 
 func parse(response *http.Response) (guid string, err error) {

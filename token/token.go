@@ -3,8 +3,36 @@ package token
 import "encoding/json"
 import "fmt"
 import "github.com/pivotalservices/gtils/http"
+import "github.com/pivotalservices/uaaldapimport/config"
 import "io/ioutil"
 import . "net/http"
+
+type Info struct {
+	Token  string
+	Ccurl  string
+	Uaaurl string
+	User   *config.User
+	UserId string
+}
+
+type TokenFunc func(*Info) (*Info, error)
+
+func (current TokenFunc) Next(next TokenFunc) TokenFunc {
+	return func(info *Info) (*Info, error) {
+		info, err := current(info)
+		if err != nil {
+			return info, err
+		}
+		return next(info)
+	}
+}
+
+type OrgFunc func(*Info, config.Org) error
+type SpaceFunc func(*Info, config.Space) error
+
+func (current TokenFunc) MapOrgs(orgFunc OrgFunc) SpaceFunc {
+	return nil
+}
 
 type Token struct {
 	AccessToken string `json:"access_token"`
