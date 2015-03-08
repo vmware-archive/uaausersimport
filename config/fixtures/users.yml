@@ -1,9 +1,8 @@
-sysdomain: 10.244.0.34.xip.io
 users:
-- uid: sding
-  externalid: uid=sding,ou=People,dc=homelab,dc=io
+- uid: jcalabrese@pivotal.io
+  externalid: uid=jcalabrese,ou=People,dc=homelab,dc=io
   emails:
-  - sding@pivotal.io
+  - jcalabrese@pivotal.io
   orgs:
     - guid: 1ff0d5d8-cd7f-4cf6-bf8d-d6632cac2921
       roles:
@@ -29,7 +28,7 @@ users:
         - guid: 0898f4d0-69e2-4ec1-9947-4dc19c980042
           roles:
           - auditors
-- uid: rparrish
+- uid: rparrish@pivotal.io
   externalid: uid=rparrish,ou=People,dc=homelab,dc=io
   emails:
   - rparrish@pivotal.io

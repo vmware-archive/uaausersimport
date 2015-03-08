@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/pivotalservices/uaaldapimport/functions"
 	. "github.com/pivotalservices/uaaldapimport/token"
 )
 
@@ -32,7 +33,7 @@ var NewRoundTripper = func() http.RoundTripper {
 	}
 }
 
-var Adduser TokenFunc = func(info *Info) (infoRet *Info, err error) {
+var Adduser functions.UaaAddUserFunc = func(info functions.UserInfo) (userId string, err error) {
 	emails := make([]Email, 0)
 	for _, value := range info.User.Emails {
 		email := Email{
@@ -55,13 +56,7 @@ var Adduser TokenFunc = func(info *Info) (infoRet *Info, err error) {
 	if err != nil {
 		return
 	}
-	id, err := parse(response)
-	if err != nil {
-		return
-	}
-	info.UserId = id
-	infoRet = info
-	return
+	return parse(response)
 }
 
 func parse(response *http.Response) (guid string, err error) {

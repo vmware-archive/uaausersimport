@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/pivotalservices/uaaldapimport/functions"
 	. "github.com/pivotalservices/uaaldapimport/token"
 )
 
@@ -11,7 +12,7 @@ type UserRequest struct {
 	Id string `json:"guid"`
 }
 
-var Adduser TokenFunc = func(info *Info) (infoRet *Info, err error) {
+var Adduser functions.CCAddUserFunc = func(info functions.UserIdInfo) (err error) {
 	userRequest := UserRequest{
 		Id: info.UserId,
 	}
@@ -21,5 +22,5 @@ var Adduser TokenFunc = func(info *Info) (infoRet *Info, err error) {
 	}
 	body := bytes.NewBuffer(data)
 	_, err = RequestWithToken(info.Token, fmt.Sprintf("%s/v2/users", info.Ccurl), "POST", "application/json", body)
-	return info, err
+	return err
 }

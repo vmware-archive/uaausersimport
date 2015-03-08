@@ -17,7 +17,6 @@ var _ = Describe("Config", func() {
 				cfg, err := config.Parse(file)
 				fmt.Print(err)
 				Ω(err).Should(BeNil())
-				Ω(cfg.Sysdomain).Should(Equal("10.244.0.34.xip.io"))
 				Ω(len(cfg.Users)).Should(Equal(2))
 				Ω(cfg.Users[0].Externalid).Should(Equal("uid=sding,ou=People,dc=homelab,dc=io"))
 				Ω(cfg.Users[1].Externalid).Should(Equal("uid=rparrish,ou=People,dc=homelab,dc=io"))

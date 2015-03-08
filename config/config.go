@@ -24,8 +24,7 @@ type User struct {
 	Orgs       []Org
 }
 type Config struct {
-	Sysdomain string
-	Users     []User
+	Users []User
 }
 
 func Parse(reader io.Reader) (*Config, error) {
