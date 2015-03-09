@@ -103,6 +103,12 @@ export LDAP_USERS=config/fixtures/users.yml (change to your user files)
   ```
   export DEBUG_HTTP=true
   ```
+  
+* Start import
+  
+  ```
+  uaaldapimport
+  ```
 ## Future work
 
 * May use name instead of guid for the orgs/space in the users config file (Need more API calls to get GUID based on names)
