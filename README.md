@@ -22,34 +22,33 @@ Steps (What this progam is doing?):
    * Sample user config
 
    ```
-   users:
    - uid: jcalabrese@pivotal.io
      externalid: uid=jcalabrese,ou=People,dc=homelab,dc=io
      emails:
      - jcalabrese@pivotal.io
      orgs:
-       - guid: 1ff0d5d8-cd7f-4cf6-bf8d-d6632cac2921
+       - name: org1
          roles:
          - managers
          - auditors
          spaces:
-           - guid: 96243054-2eaa-4fb9-99cf-b9c37920ce6b
+           - name: space1
              roles:
              - managers
              - developers
              - auditors
-           - guid: 7207320b-2384-42bd-b893-4afef7f7b209
+           - name: space2
              roles:
              - managers
              - auditors
-       - guid: a8e28250-989a-4214-b839-ee71e1d1b72a
+       - name: org2
          roles:
          - auditors
          spaces:
-           - guid: a6a7f87b-c236-4dc6-8cf1-df7d602b228f
+           - name: space1
              roles:
              - auditors
-           - guid: 0898f4d0-69e2-4ec1-9947-4dc19c980042
+           - name: space2
              roles:
              - auditors
    ```
