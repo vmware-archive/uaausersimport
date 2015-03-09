@@ -34,6 +34,7 @@ var NewRoundTripper = func() http.RoundTripper {
 }
 
 var Adduser functions.UaaAddUserFunc = func(info functions.UserInfo) (userId string, err error) {
+	fmt.Println(fmt.Sprintf("add user id: %s .........", info.User.Uid))
 	emails := make([]Email, 0)
 	for _, value := range info.User.Emails {
 		email := Email{

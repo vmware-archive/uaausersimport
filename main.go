@@ -1,8 +1,12 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"io/ioutil"
 	"os"
+
+	"gopkg.in/yaml.v2"
 
 	uaa "github.com/pivotalservices/uaaldapimport/adduser"
 	cc "github.com/pivotalservices/uaaldapimport/cloudcontroller"
@@ -19,22 +23,36 @@ func main() {
 }
 
 func run() (err error) {
-	file, err := os.Open("config/fixtures/users.yml")
+	users := os.Getenv("LDAP_USERS")
+	file, err := os.Open(users)
 	if err != nil {
-		fmt.Println(err)
+		err = errors.New(fmt.Sprintf("Can not open %s : %s", users, err.Error()))
 		return
 	}
 	cfg, err := config.Parse(file)
 	if err != nil {
 		return
 	}
-	info := &Info{
-		Uaaurl:   "https://uaa.sys.homelab.io",
-		Ccurl:    "https://api.sys.homelab.io",
-		Clientid: "bulkimport",
-		Secret:   "test",
+	info, err := parseEnv()
+	if err != nil {
+		return
 	}
 	fun := token.GetToken.MapUsers(cfg.Users).AddUaaUser(uaa.Adduser).AddCCUser(cc.Adduser).MapOrgs(cc.AssociateOrg).MapSpaces(cc.AssociateSpace)
-	//fun := token.GetToken.MapUsers(cfg.Users)
 	return fun(info)
+}
+
+func parseEnv() (*Info, error) {
+	env := os.Getenv("CF_ENVIRONMENT")
+	file, err := os.Open(env)
+	if err != nil {
+		err = errors.New(fmt.Sprintf("Can not open %s : %s", env, err.Error()))
+		return nil, err
+	}
+	info := Info{}
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		return nil, err
+	}
+	err = yaml.Unmarshal(data, &info)
+	return &info, err
 }

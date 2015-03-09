@@ -13,6 +13,7 @@ type UserRequest struct {
 }
 
 var Adduser functions.CCAddUserFunc = func(info functions.UserIdInfo) (err error) {
+	fmt.Println(fmt.Sprintf("add user id: %s with Uaa id: %s .........", info.User.Uid, info.UserId))
 	userRequest := UserRequest{
 		Id: info.UserId,
 	}

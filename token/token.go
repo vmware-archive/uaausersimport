@@ -17,6 +17,7 @@ var NewGateway = func() http.HttpGateway {
 }
 
 var GetToken functions.TokenFunc = func(info *functions.Info) (token string, err error) {
+	fmt.Println("Getting token.............")
 	entity := http.HttpRequestEntity{
 		Url:      fmt.Sprintf("%s/oauth/token?grant_type=client_credentials", info.Uaaurl),
 		Username: info.Clientid,

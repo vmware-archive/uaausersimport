@@ -1,0 +1,4 @@
+uaaurl: https://uaa.sys.homelab.io
+ccurl: https://api.sys.homelab.io
+clientid: bulkimport
+secret: test
