@@ -2,31 +2,17 @@
 
 
 ## Problem
-When cf integrates with ldap. Currently cloudfoundry does not have any way to assgin user roles (E.g. org and space). So user has to login to the CF env first, then operator assigns the roles to them. When they login again, users are able to see the assigned roles
+When cf integrates with ldap. Currently cloudfoundry does not have any way to assgin user roles (E.g. org and space). So user has to login to the CF env first, then operator assign the roles to them. When they login again, users can see the spaces.
 
-This may not be applicable for the invitation model (login first, assign roles and login back) for operators.
+This may not be applicable for the invitation model for operators, since they have to ask users to login first
 
 ## Resolution
 
-Prepopulate the users with uaa api and cloudcontroller api. So they can have all the roles populated before user logins.
+Prepopulate the users with uaa api and cloudcontroller api. So they can have all the roles before user logins.
 
 Prerequisites:
 
 Use uaac to create a client id, who has cloudcontroller.admin and scim.write
-
-* uaac client add -i
-* Client name: bulkimport
-* New client secret: <secret>
-* Verify new client secret: <secret>
-* scope (list): Press Enter
-* authorized grant types (list):  client_credentials
-* authorities (list):  cloud_controller.admin,scim.write
-* access token validity (seconds):  Press Enter
-* refresh token validity (seconds): Press Enter
-* redirect uri (list): Press Enter
-* autoapprove (list): Press Enter
-* signup redirect url (url):  Press Enter
-
 
 Steps (What this progam is doing?):
 
@@ -71,7 +57,8 @@ Steps (What this progam is doing?):
 3. Add user to the cloudcontroler
 4. Associate user roles with the orgs
 5. Associate user roles with the spaces
-6. Functional Programming (:))
+
+   * Functional Programming (In [main.go](main.go))
 
    ```
       token.GetToken.MapUsers(cfg.Users).AddUaaUser(uaa.Adduser).AddCCUser(cc.Adduser).MapOrgs(cc.AssociateOrg).MapSpaces(cc.AssociateSpace)
@@ -103,14 +90,8 @@ export LDAP_USERS=config/fixtures/users.yml (change to your user files)
   ```
   export DEBUG_HTTP=true
   ```
-  
-* Start import
-  
-  ```
-  uaaldapimport
-  ```
+
 ## Future work
 
-* May use name instead of guid for the orgs/space in the users config file (Need more API calls to get GUID based on names)
-* Create an interface (web/command line) to help client generate formatted user data file
-  
+* Create an interface (web/command line) help client generate formatted file
+* Cross compile the code
