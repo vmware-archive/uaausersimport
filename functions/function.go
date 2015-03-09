@@ -27,14 +27,15 @@ type CCAddUserFunc func(UserIdInfo) error
 
 type OrgInfo struct {
 	UserIdInfo
-	Org config.Org
+	Org  config.Org
+	Guid string
 }
 type SpaceInfo struct {
 	OrgInfo
 	Space config.Space
 }
 
-type OrgFunc func(OrgInfo) error
+type OrgFunc func(OrgInfo) (string, error)
 type SpaceFunc func(SpaceInfo) error
 type UserFuncs func(*Info) ([]UserInfo, error)
 type UserIdFuncs func(*Info) ([]UserIdInfo, error)
@@ -111,10 +112,11 @@ func (userIdFuncs UserIdFuncs) MapOrgs(orgFunc OrgFunc) OrgFuncs {
 					UserIdInfo: userIdInfo,
 					Org:        org,
 				}
-				err = orgFunc(orgInfo)
+				guid, err := orgFunc(orgInfo)
 				if err != nil {
 					return nil, err
 				}
+				orgInfo.Guid = guid
 				orgInfos = append(orgInfos, orgInfo)
 			}
 		}

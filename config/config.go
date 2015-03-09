@@ -8,11 +8,11 @@ import (
 )
 
 type Space struct {
-	Guid  string
+	Name  string
 	Roles []string
 }
 type Org struct {
-	Guid   string
+	Name   string
 	Roles  []string
 	Spaces []Space
 }
