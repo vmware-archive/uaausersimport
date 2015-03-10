@@ -14,6 +14,20 @@ Prerequisites:
 
 Use uaac to create a client id, who has cloudcontroller.admin and scim.write
 
+* uaac client add -i
+* Client name: bulkimport
+* New client secret: <secret>
+* Verify new client secret: <secret>
+* scope (list): Press Enter
+* authorized grant types (list):  client_credentials
+* authorities (list):  cloud_controller.admin,scim.write
+* access token validity (seconds):  Press Enter
+* refresh token validity (seconds): Press Enter
+* redirect uri (list): Press Enter
+* autoapprove (list): Press Enter
+* signup redirect url (url):  Press Enter
+
+
 Steps (What this progam is doing?):
 
 1. Get token from uaa
