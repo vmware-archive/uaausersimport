@@ -37,6 +37,7 @@ func run() (err error) {
 	if err != nil {
 		return
 	}
+	info.RequestFn = token.RequestWithToken
 	fun := token.GetToken.MapUsers(cfg.Users).AddUaaUser(uaa.Adduser).AddCCUser(cc.Adduser).MapOrgs(cc.AssociateOrg).MapSpaces(cc.AssociateSpace)
 	return fun(info)
 }

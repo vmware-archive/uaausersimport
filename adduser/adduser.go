@@ -9,7 +9,6 @@ import (
 	"net/http"
 
 	"github.com/pivotalservices/uaaldapimport/functions"
-	. "github.com/pivotalservices/uaaldapimport/token"
 )
 
 type Email struct {
@@ -53,7 +52,7 @@ var Adduser functions.UaaAddUserFunc = func(info functions.UserInfo) (userId str
 		return
 	}
 	body := bytes.NewBuffer(data)
-	response, err := RequestWithToken(info.Token, fmt.Sprintf("%s/Users", info.Uaaurl), "POST", "application/json", body)
+	response, err := info.RequestFn(info.Token, fmt.Sprintf("%s/Users", info.Uaaurl), "POST", "application/json", body)
 	if err != nil {
 		return
 	}

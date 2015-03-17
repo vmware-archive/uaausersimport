@@ -1,12 +1,20 @@
 package functions
 
-import "github.com/pivotalservices/uaaldapimport/config"
+import (
+	"io"
+	"net/http"
+
+	"github.com/pivotalservices/uaaldapimport/config"
+)
+
+type RequestTokenFunc func(string, string, string, string, io.Reader) (*http.Response, error)
 
 type Info struct {
-	Ccurl    string
-	Uaaurl   string
-	Clientid string
-	Secret   string
+	Ccurl     string
+	Uaaurl    string
+	Clientid  string
+	Secret    string
+	RequestFn RequestTokenFunc
 }
 
 type TokenFunc func(*Info) (string, error)
