@@ -95,7 +95,7 @@ Steps (What this progam is doing?):
 * Get the binary
 
 ```
-go get -u go get -u github.com/pivotalservices/uaaldapimport
+go get -u github.com/pivotalservices/uaaldapimport
 
 ```
 * Target the cf environment
