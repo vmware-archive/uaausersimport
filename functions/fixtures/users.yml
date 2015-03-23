@@ -1,0 +1,60 @@
+users:
+- uid: jcalabrese@pivotal.io
+  externalid: uid=jcalabrese,ou=People,dc=homelab,dc=io
+  emails:
+  - jcalabrese@pivotal.io
+  orgs:
+    - name: org1 
+      roles:
+      - managers
+      - auditors
+      spaces:
+        - name: space1
+          roles:
+          - managers
+          - developers
+          - auditors
+        - name: space2
+          roles:
+          - managers
+          - auditors
+    - name: org2
+      roles:
+      - auditors
+      spaces:
+        - name: space1
+          roles:
+          - auditors
+        - name: space2
+          roles:
+          - auditors
+- uid: rparrish@pivotal.io
+  externalid: uid=rparrish,ou=People,dc=homelab,dc=io
+  emails:
+  - rparrish@pivotal.io
+  orgs:
+    - name: org1
+      roles:
+      - auditors
+      spaces:
+        - name: space1
+          roles:
+          - managers
+        - name: space2
+          roles:
+          - managers
+    - name: org2
+      roles:
+      - managers
+      - auditors
+      spaces:
+        - name: space1
+          roles:
+          - managers
+          - developers
+          - auditors
+        - name: space2
+          roles:
+          - managers
+          - developers
+          - auditors
