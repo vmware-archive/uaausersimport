@@ -1,0 +1,73 @@
+box: tcnksm/gox
+build:
+  # The steps that will be executed on build
+  steps:
+    # Sets the go workspace and places you package
+    # at the right place in the workspace tree
+    - setup-go-workspace
+
+    # Get the dependencies
+    - script:
+        name: go get
+        code: |
+          cd $WERCKER_SOURCE_DIR
+          go version
+          go get -u github.com/tools/godep
+          export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+
+    - script:
+        name: run some unit tests
+        code: |
+          godep go test ./... -v -race -cover
+
+    # lets make sure we can build
+    # the main executable (later we can cross compile and upload)
+    - script:
+        name: go smoke build
+        code: |
+          godep go build . 
+
+    - script:
+        name: cross platform build
+        code: |
+          GOPATH=$(pwd)/Godeps/_workspace/:$GOPATH gox -verbose -output="build/{{.Dir}}_{{.OS}}_{{.Arch}}" -os="linux darwin windows" .
+
+    - script:
+        name: add repo to artifact
+        code: |
+          cp -R ./ ${WERCKER_OUTPUT_DIR}
+
+deploy:
+  steps: 
+    - install-packages:
+        packages: ${INSTALL_DEPENDENCIES}
+
+    - add-ssh-key:
+        keyname: PCF_GITHUB_KEY
+        
+    - add-to-known_hosts:
+        hostname: github.com
+        fingerprint: 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48
+
+    - xchapter7x/flowy-release:
+        action: "tag-only-release"
+        tag_variable_name: "VERSION_TAG"
+        active: $GITFLOW_ACTIVE
+        git_name: $GITFLOW_NAME
+        git_email: $GITFLOW_EMAIL
+    
+    - script:
+        name: check their is a tag matching commit hash for master deploys
+        code: |
+          ./checkHash
+
+    - script:
+        name: name release folder
+        code: |
+          ./setReleaseName
+
+    - jarrett/s3sync:
+        key-id: $S3_KEY
+        key-secret: $S3_SECRET
+        bucket-url: ${S3_BUCKET}/${S3_FOLDER}/${WERCKER_GIT_COMMIT}/
+        source-dir: ${BUILD_DIR}
