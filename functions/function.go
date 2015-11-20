@@ -60,9 +60,10 @@ func (tokenFunc TokenFunc) MapUsers(config config.Config) UserFuncs {
 		users := make([]UserInfo, 0)
 		for _, user := range config.Users {
 			userInfo := UserInfo{
-				Info:  info,
-				Token: token,
-				User:  user,
+				Info:   info,
+				Token:  token,
+				User:   user,
+				Origin: config.Origin,
 			}
 			users = append(users, userInfo)
 		}
