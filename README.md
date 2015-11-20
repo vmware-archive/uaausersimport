@@ -2,7 +2,7 @@
 
 
 ## Problem
-When cf integrates with ldap. Currently cloudfoundry does not have any way to assgin user roles (E.g. org and space). So user has to login to the CF env first, then operator assign the roles to them. When they login again, users can see the spaces.
+When cloudfoundry integrates with external userstores (E.g. ldap/saml). Currently it does not have any way to assign user roles (E.g. org and space). So users have to login to the CF env first, then operator assigns the roles to them. When they login again, users can see the org and spaces.
 
 This may not be applicable for the invitation model for operators, since they have to ask users to login first
 
@@ -96,7 +96,7 @@ Steps (What this progam is doing?):
 * Get the binary
 
 ```
-go get -u github.com/pivotalservices/uaaldapimport
+go get -u github.com/pivotalservices/uaausersimport
 
 ```
 * Target the cf environment
@@ -119,7 +119,7 @@ export USERS_CONFIG_FILE=config/fixtures/users.yml (change to your user files)
 * Run
 
   ```
-  uaaldapimport
+  uaausersimport
   ```
 
 ## Future work
