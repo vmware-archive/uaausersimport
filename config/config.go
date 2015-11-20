@@ -24,7 +24,8 @@ type User struct {
 	Orgs       []Org
 }
 type Config struct {
-	Users []User
+	Origin string
+	Users  []User
 }
 
 func Parse(reader io.Reader) (*Config, error) {

@@ -47,6 +47,7 @@ Steps (What this progam is doing?):
    * Sample user config
 
    ```
+   origin: ldap
    - uid: jcalabrese@pivotal.io
      externalid: uid=jcalabrese,ou=People,dc=homelab,dc=io
      emails:
@@ -107,12 +108,18 @@ export CF_ENVIRONMENT=environment.yml (change to your environment.yml)
 * Target the users file
 
 ```
-export LDAP_USERS=config/fixtures/users.yml (change to your user files)
+export USERS_CONFIG_FILE=config/fixtures/users.yml (change to your user files)
 ```
 * Enable http traffic dump, optional:
 
   ```
   export DEBUG_HTTP=true
+  ```
+
+* Run
+
+  ```
+  uaaldapimport
   ```
 
 ## Future work

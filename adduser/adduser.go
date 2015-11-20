@@ -45,7 +45,7 @@ var Adduser functions.UaaAddUserFunc = func(info functions.UserInfo) (userId str
 		UserName:   info.User.Uid,
 		Externalid: info.User.Externalid,
 		Emails:     emails,
-		Origin:     "ldap",
+		Origin:     info.Origin,
 	}
 	data, err := json.Marshal(userRequest)
 	if err != nil {

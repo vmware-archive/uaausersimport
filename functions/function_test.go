@@ -25,7 +25,7 @@ var _ = Describe("Function", func() {
 			var tokenFunc TokenFunc = func(*Info) (string, error) {
 				return "my_token", nil
 			}
-			resultFunc := tokenFunc.MapUsers(cfg.Users)
+			resultFunc := tokenFunc.MapUsers(*cfg)
 			userInfos, err := resultFunc(info)
 			Ω(err).Should(BeNil())
 			Ω(len(userInfos)).Should(Equal(2))

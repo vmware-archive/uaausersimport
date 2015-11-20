@@ -23,7 +23,7 @@ func main() {
 }
 
 func run() (err error) {
-	users := os.Getenv("LDAP_USERS")
+	users := os.Getenv("USERS_CONFIG_FILE")
 	file, err := os.Open(users)
 	if err != nil {
 		err = errors.New(fmt.Sprintf("Can not open %s : %s", users, err.Error()))
@@ -38,7 +38,7 @@ func run() (err error) {
 		return
 	}
 	info.RequestFn = token.RequestWithToken
-	fun := token.GetToken.MapUsers(cfg.Users).AddUaaUser(uaa.Adduser).AddCCUser(cc.Adduser).MapOrgs(cc.AssociateOrg).MapSpaces(cc.AssociateSpace)
+	fun := token.GetToken.MapUsers(*cfg).AddUaaUser(uaa.Adduser).AddCCUser(cc.Adduser).MapOrgs(cc.AssociateOrg).MapSpaces(cc.AssociateSpace)
 	return fun(info)
 }
 

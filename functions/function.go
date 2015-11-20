@@ -21,8 +21,9 @@ type TokenFunc func(*Info) (string, error)
 
 type UserInfo struct {
 	*Info
-	Token string
-	User  config.User
+	Token  string
+	User   config.User
+	Origin string
 }
 
 type UserIdInfo struct {
@@ -50,14 +51,14 @@ type UserIdFuncs func(*Info) ([]UserIdInfo, error)
 type OrgFuncs func(*Info) ([]OrgInfo, error)
 type SpaceFuncs func(*Info) error
 
-func (tokenFunc TokenFunc) MapUsers(inputs []config.User) UserFuncs {
+func (tokenFunc TokenFunc) MapUsers(config config.Config) UserFuncs {
 	return func(info *Info) ([]UserInfo, error) {
 		token, err := tokenFunc(info)
 		if err != nil {
 			return nil, err
 		}
 		users := make([]UserInfo, 0)
-		for _, user := range inputs {
+		for _, user := range config.Users {
 			userInfo := UserInfo{
 				Info:  info,
 				Token: token,

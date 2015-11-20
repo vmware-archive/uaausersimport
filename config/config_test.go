@@ -28,6 +28,7 @@ var _ = Describe("Config", func() {
 				Ω(len(cfg.Users[0].Orgs[0].Spaces)).Should(Equal(2))
 				Ω(cfg.Users[0].Orgs[0].Spaces[0].Roles[0]).Should(Equal("managers"))
 				Ω(cfg.Users[0].Orgs[0].Spaces[1].Roles[1]).Should(Equal("auditors"))
+				Ω(cfg.Origin).Should(Equal("ldap"))
 				Ω(len(cfg.Users[0].Orgs[1].Spaces)).Should(Equal(2))
 			})
 		})
