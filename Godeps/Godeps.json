@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/pivotalservices/uaaldapimport",
+	"ImportPath": "github.com/pivotalservices/uaausersimport",
 	"GoVersion": "go1.4.2",
 	"Packages": [
 		"./..."

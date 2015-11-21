@@ -4,7 +4,7 @@ import "encoding/json"
 import "fmt"
 import "github.com/pivotalservices/gtils/http"
 
-import "github.com/pivotalservices/uaaldapimport/functions"
+import "github.com/pivotalservices/uaausersimport/functions"
 import "io/ioutil"
 import . "net/http"
 

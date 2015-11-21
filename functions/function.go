@@ -4,7 +4,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/pivotalservices/uaaldapimport/config"
+	"github.com/pivotalservices/uaausersimport/config"
 )
 
 type RequestTokenFunc func(string, string, string, string, io.Reader) (*http.Response, error)

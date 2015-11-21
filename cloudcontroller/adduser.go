@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/pivotalservices/uaaldapimport/functions"
+	"github.com/pivotalservices/uaausersimport/functions"
 )
 
 type UserRequest struct {

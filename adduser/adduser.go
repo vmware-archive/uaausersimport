@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/pivotalservices/uaaldapimport/functions"
+	"github.com/pivotalservices/uaausersimport/functions"
 )
 
 type Email struct {

@@ -8,8 +8,8 @@ import (
 	. "github.com/onsi/gomega"
 	. "github.com/pivotalservices/gtils/http"
 	"github.com/pivotalservices/gtils/http/httptest"
-	"github.com/pivotalservices/uaaldapimport/functions"
-	. "github.com/pivotalservices/uaaldapimport/token"
+	"github.com/pivotalservices/uaausersimport/functions"
+	. "github.com/pivotalservices/uaausersimport/token"
 )
 
 var requestAdaptor RequestAdaptor = func() (*http.Response, error) {

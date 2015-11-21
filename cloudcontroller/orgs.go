@@ -3,7 +3,7 @@ package cloudcontroller
 import (
 	"fmt"
 
-	"github.com/pivotalservices/uaaldapimport/functions"
+	"github.com/pivotalservices/uaausersimport/functions"
 )
 
 var AssociateOrg functions.OrgFunc = func(orgInfo functions.OrgInfo) (guid string, err error) {

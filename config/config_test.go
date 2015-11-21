@@ -6,7 +6,7 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/pivotalservices/uaaldapimport/config"
+	"github.com/pivotalservices/uaausersimport/config"
 )
 
 var _ = Describe("Config", func() {

@@ -8,11 +8,11 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	uaa "github.com/pivotalservices/uaaldapimport/adduser"
-	cc "github.com/pivotalservices/uaaldapimport/cloudcontroller"
-	config "github.com/pivotalservices/uaaldapimport/config"
-	. "github.com/pivotalservices/uaaldapimport/functions"
-	token "github.com/pivotalservices/uaaldapimport/token"
+	uaa "github.com/pivotalservices/uaausersimport/adduser"
+	cc "github.com/pivotalservices/uaausersimport/cloudcontroller"
+	config "github.com/pivotalservices/uaausersimport/config"
+	. "github.com/pivotalservices/uaausersimport/functions"
+	token "github.com/pivotalservices/uaausersimport/token"
 )
 
 func main() {

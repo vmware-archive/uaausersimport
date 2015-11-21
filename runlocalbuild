@@ -1,1 +1,1 @@
-wercker build --git-domain github.com --git-owner pivotalservices --git-repository uaaldapimport
+wercker build --git-domain github.com --git-owner pivotalservices --git-repository uaausersimport

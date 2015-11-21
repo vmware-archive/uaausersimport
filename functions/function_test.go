@@ -6,8 +6,8 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/pivotalservices/uaaldapimport/config"
-	. "github.com/pivotalservices/uaaldapimport/functions"
+	"github.com/pivotalservices/uaausersimport/config"
+	. "github.com/pivotalservices/uaausersimport/functions"
 )
 
 var info *Info = &Info{

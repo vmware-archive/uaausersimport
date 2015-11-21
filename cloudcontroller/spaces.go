@@ -3,7 +3,7 @@ package cloudcontroller
 import (
 	"fmt"
 
-	"github.com/pivotalservices/uaaldapimport/functions"
+	"github.com/pivotalservices/uaausersimport/functions"
 )
 
 var AssociateSpace functions.SpaceFunc = func(spaceInfo functions.SpaceInfo) (err error) {
