@@ -11,6 +11,16 @@
 			"Rev": "e7e42189c4575bf1b41d51b4340ea15c99487f84"
 		},
 		{
+			"ImportPath": "github.com/onsi/ginkgo",
+			"Comment": "v1.2.0-34-ge43390e",
+			"Rev": "e43390e35a4a88f3f95d5ddf9055efb7a1170469"
+		},
+		{
+			"ImportPath": "github.com/onsi/gomega",
+			"Comment": "v1.0-48-g766f404",
+			"Rev": "766f4042b942146e90594d145c5071fa92c0aa9a"
+		},
+		{
 			"ImportPath": "github.com/pivotal-golang/clock",
 			"Rev": "3fd3c1944c59d9742e1cd333672181cd1a6f9fa0"
 		},
