@@ -82,6 +82,7 @@ func parseEnv(ctx *config.Context) error {
 
 	ctx.RequestFn = token.RequestWithToken
 	ctx.Users = cfg.Users
+	ctx.Origin = cfg.Origin
 
 	tokenFetcherConfig := uaa.TokenFetcherConfig{
 		MaxNumberOfRetries:                3,
